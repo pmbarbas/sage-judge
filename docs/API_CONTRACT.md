@@ -1,0 +1,13 @@
+# API contract — v0.3
+
+The caller supplies a versioned untrusted proposal bundle separately from a trusted registry and policy snapshot. The registry digest binds bytes for replay; it does not authenticate origin or grant authority. Applications must establish caller identity, query authorization and trust-store provenance outside this library.
+
+Routes are structured and bind exact predicate, argument tuple, entity, as-of date, policy version and a unique route identity. The API independently computes a finite backward dependency closure through the P01 rules and derives expected reviewed mapping IDs from the registry. The caller-provided route member list is reconciled against this set; it cannot omit or add premises. Supported closure requires every reachable rule body to be groundable from the matched head, with exactly the same ordered argument tuple as the query. Mapping entity, date and policy scope must also match. Both positive and negative heads are conservatively considered. Reachable different-argument dependencies (including another entity) and body-only variables are rejected before evidence selection with typed errors. An unrelated other-entity record or unreachable rule does not itself cause refusal. Route mismatch or rejected required mapping yields incomplete coverage and caps the advisory at REVIEW. The theory and query are validated before dependency selection.
+
+Proposal decision, claims and citations do not add, remove or select trusted premises. Citation spans are validated diagnostics only. Proposal ABSTAIN or REVIEW caps the business advisory at REVIEW without changing admitted facts or four-valued P01 posture. A valid record always has execution authority NONE.
+
+The decision record carries the trusted snapshot hash, route and query, dependency closure, expected/provided/considered/admitted/rejected/excluded mapping IDs with reasons, P01 SVE and replay digest. `verify` recomputes the record from exact inputs and re-runs the real P01 evaluator/SVE validator. It is deterministic replay by shared implementation, not independent semantic truth verification.
+
+Inputs in examples are controlled synthetic fixtures. No natural-language interpretation, human gold labels, real-world completeness, origin authentication, scientific accuracy or security certification is claimed.
+
+API and decision records use `/0.3`; input bundle, trusted registry and policy retain `/0.2`. Records from incompatible earlier implementations are not accepted; re-adjudicate exact trusted inputs if authorised. The verifier refuses unsupported dependencies through the same recomputation. No general relational or cross-entity reasoning guarantee is provided.

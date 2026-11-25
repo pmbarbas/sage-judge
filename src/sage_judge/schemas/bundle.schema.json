@@ -1,0 +1,57 @@
+{
+  "$id": "",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "proposal": {
+      "additionalProperties": true,
+      "required": [
+        "proposal_id",
+        "decision",
+        "citations",
+        "claims"
+      ],
+      "type": "object"
+    },
+    "query": {
+      "additionalProperties": false,
+      "properties": {
+        "arguments": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "as_of": {
+          "format": "date",
+          "type": "string"
+        },
+        "entity": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "predicate": {
+          "minLength": 1,
+          "type": "string"
+        }
+      },
+      "required": [
+        "predicate",
+        "arguments",
+        "as_of",
+        "entity"
+      ],
+      "type": "object"
+    },
+    "schema_version": {
+      "const": "sage-judge-bundle/0.2"
+    }
+  },
+  "required": [
+    "schema_version",
+    "query",
+    "proposal"
+  ],
+  "title": "",
+  "type": "object"
+}

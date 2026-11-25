@@ -1,0 +1,95 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "admitted_facts": {
+      "type": "array"
+    },
+    "api_version": {
+      "const": "sage-judge-api/0.3"
+    },
+    "bundle_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "business_verdict": {
+      "enum": [
+        "KEEP",
+        "REVIEW",
+        "HOLD"
+      ]
+    },
+    "coverage": {
+      "type": "object"
+    },
+    "execution_authority": {
+      "const": "NONE"
+    },
+    "limits": {
+      "type": "object"
+    },
+    "p01_sve": {
+      "type": "object"
+    },
+    "p01_validator_result": {
+      "const": "VALID"
+    },
+    "policy_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "proof_posture": {
+      "enum": [
+        "SUPPORTED",
+        "REFUTED",
+        "BOTH",
+        "UNKNOWN"
+      ]
+    },
+    "proposal_decision_advisory": {
+      "enum": [
+        "SUPPORTED",
+        "REFUTED",
+        "REVIEW",
+        "ABSTAIN"
+      ]
+    },
+    "proposal_status": {
+      "const": "UNTRUSTED_PROPOSAL_ONLY"
+    },
+    "query": {
+      "type": "object"
+    },
+    "record_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "record_version": {
+      "const": "sage-judge-decision/0.3"
+    },
+    "trusted_registry_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "type": "string"
+    }
+  },
+  "required": [
+    "record_version",
+    "api_version",
+    "bundle_sha256",
+    "trusted_registry_sha256",
+    "policy_sha256",
+    "limits",
+    "query",
+    "proposal_status",
+    "admitted_facts",
+    "proof_posture",
+    "business_verdict",
+    "execution_authority",
+    "p01_sve",
+    "p01_validator_result",
+    "record_sha256",
+    "proposal_decision_advisory",
+    "coverage"
+  ],
+  "type": "object"
+}
